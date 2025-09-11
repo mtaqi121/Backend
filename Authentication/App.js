@@ -1,12 +1,12 @@
 import express from "express";
 import bodyParser from "body-parser";
-import todoRouter from "./src/Router/Todo.js";
-import userRouter from "./src/Router/user.js";
+import todoRoutes from "./src/Router/Todo.js";
+import userRoutes from "./src/Router/user.js";
 const app = express();
 
 app.use(bodyParser.json());
-app.use("/api", todoRouter);
-app.use("/api/user", userRouter);
+app.use("/api", todoRoutes);
+app.use("/api/user", userRoutes);
 
 
 app.listen(3000,() => {
