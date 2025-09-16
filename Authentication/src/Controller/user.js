@@ -1,13 +1,12 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import User from "../Models/user.js";
 const secret = "13253mjbnmbcvbnvcxur76547e3";
-
-const users = [];
 
 const createUser = async (req, res) => {
   var { name, email, password } = req.body;
 
-  const isUserExist = users.find((obj) => obj.email === email);
+  const isUserExist = await User.findOne({ email: email });
   if (isUserExist) {
     return res.send({ massege: "User already exist" });
   }
@@ -17,15 +16,16 @@ const createUser = async (req, res) => {
     name,
     email,
     password: hashedPassword,
-    id: Date.now(),
-    Token: "",
   };
-  users.push(userobj);
-  res.send({ message: "User created successfully", users: userobj });
+  await User.create(userobj);
+  return res.send({
+    message: "User Created Successfully",
+    User: userobj,
+  });
 };
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
-  const userObj = users.find((obj) => obj.email === email);
+  const userObj = await User.findOne({ email });
   if (!userObj) {
     return res.send({
       message: "User Not Found",
@@ -50,7 +50,10 @@ const loginUser = async (req, res) => {
     });
   }
 };
-const getAllUsers = (_, res) => {
-  res.send(users);
+const getAllUsers = async (_, res) => {
+  const AllUser = await User.find({});
+  return res.send({
+    AllUser,
+  });
 };
 export { createUser, loginUser, getAllUsers };
