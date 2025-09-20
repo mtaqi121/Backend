@@ -9,8 +9,10 @@ app.use(bodyParser.json());
 app.use("/api", todoRoutes);
 app.use("/api/user", userRoutes);
 
-dbConnection().then(() => {
+
+dbConnection().then(( )=> {
   app.listen(3000, () => {
     console.log("Server running ");
   });
 });
+
