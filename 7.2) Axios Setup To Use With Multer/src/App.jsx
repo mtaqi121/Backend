@@ -2,8 +2,7 @@ import { useState } from "react";
 import { apiRequest } from "./Service/app";
 
 const App = () => {
-  const [image, setImage] = useState(null);
-const [preview, setPreview] = useState(null);
+  const [image, setImage] = useState([]);
 
   const upload = async () => {
     try {
@@ -17,7 +16,7 @@ const [preview, setPreview] = useState(null);
 
       const response = await apiRequest("POST", "/uploads", formData);
       console.log("response", response.data);
-          setPreview(response.data.secure_url);
+         
 
     } catch (error) {
       console.error("Upload failed:", error);
@@ -38,7 +37,6 @@ const [preview, setPreview] = useState(null);
         }}
       />
       <button onClick={upload}>Submit</button>
-          {preview && <img src={preview} alt="Uploaded to Cloudinary" width="200" />}
 
     </div>
   );

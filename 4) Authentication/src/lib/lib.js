@@ -1,7 +1,3 @@
-// c25yrelme_db_user    // MongoDB username
-// Dos0sCUBiNE5KMrT     // MongoDB password
-// mongodb+srv://c25yrelme_db_user:Dos0sCUBiNE5KMrT@cluster0.ncbvn1c.mongodb.net/
-
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
@@ -17,4 +13,3 @@ const dbConnection = async () => {
   }
 };
 export default dbConnection;
-
